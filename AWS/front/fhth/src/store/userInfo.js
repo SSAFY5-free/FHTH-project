@@ -1,25 +1,23 @@
 import axios from "axios";
 import { userAPI } from "../utils/axios";
-import { baseURL, port } from "../utils/conf";
-import createPersistedState from "vuex-persistedstate";
+// import { baseURL, port } from "../utils/conf";
+// import createPersistedState from "vuex-persistedstate";
 import VueCookies from "vue-cookies";
-//로그인 처리 관련 저장소 모듈
 
-const login = {
-  plugins: [createPersistedState({})],
+//로그인 처리 관련 저장소 모듈
+const userInfo = {
+  // plugins: [createPersistedState({})],
   namespaced: true,
-  state: {
-    host: baseURL + port,
-    // accessToken: null,
+  state: () => ({
     email: "",
     name: "",
-    socket: "aaa",
-  },
+    socket: "",
+  }),
   mutations: {
     loginToken(state, payload) {
       console.log("login/loinToken");
-      console.log(payload);
       VueCookies.set("accessToken", payload.accessToken, "1h");
+      console.log(state)
       state.accessToken = payload.accessToken;
       state.email = payload.email;
     },
@@ -80,4 +78,4 @@ const login = {
     },
   },
 };
-export default login;
+export default userInfo;

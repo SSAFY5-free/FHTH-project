@@ -18,7 +18,7 @@
     <!-- <p>robots : {{ robots }}</p> -->
     <div style="display: flex"></div>
     <div id="screen" class="bc">
-      <img src="http://172.30.1.22:8080/?action=stream" alt="" />
+      <img src="http://172.30.1.7:8091/stream.mjpg" alt="" width="400px" height="300px" style="transform:rotate(180deg)"/>
     </div>
     <div id="keyPad">
       <div>
@@ -28,7 +28,7 @@
             type="primary"
             size="default"
             icon="el-icon-caret-top"
-            @click="onClick('top')"
+            @click="onClick('go')"
           ></el-button>
         </div>
 
@@ -43,7 +43,14 @@
             @click="onClick('left')"
           ></el-button>
         </div>
-        <div></div>
+        <div>
+          <el-button
+            type="primary"
+            size="default"
+            icon="el-icon-circle-close"
+            @click="onClick('stop')"
+          ></el-button>
+        </div>
         <div>
           <el-button
             type="primary"
@@ -60,10 +67,17 @@
             type="primary"
             size="default"
             icon="el-icon-caret-bottom"
-            @click="onClick('bottom')"
+            @click="onClick('back')"
           ></el-button>
         </div>
-        <div></div>
+        <div>
+          <el-button
+            type="primary"
+            size="default"
+            @click="onClick('middle')"
+            icon="el-icon-d-caret"
+          ></el-button>
+        </div>
       </div>
     </div>
   </el-card>
@@ -88,7 +102,7 @@ export default {
       this.cur.robot_idx = idx;
     },
     onClick(direction) {
-      const robot_id = this.robots[this.cur.robot_idx]._id;
+      const robot_id = this.robots[this.cur.robot_idx].id;
       this.$store.dispatch("userInfo/EMIT_SOCKET", {
         namespace: "command",
         data: {
@@ -96,6 +110,9 @@ export default {
           direction,
         },
       });
+    },
+    created() {
+      this.onChange(0);
     },
   },
 };

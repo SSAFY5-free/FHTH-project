@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+  fhth-mongo:
+    image: "bure5kzam/fhth-mongo"
+    # ports:
+    # - "27017:27017"
+
+  fhth-nodejs:
+    image: "bure5kzam/fhth-nodejs"
+    ports:
+      - "8078:8079"
+      - "443:443"
+
+  # jenkins:
+  #   build: .
+  #   ports:
+  #     - "5000:5000"
+  # redis:
+  #   image: "redis:alpine"

@@ -1,45 +1,43 @@
-const mongoose = require("mongoose");
-//User
-const userSchema = new mongoose.Schema({
-  email: String,
-  pw: String,
-  robots_id: [mongoose.Types.ObjectId],
-});
-const sessionSchema = new mongoose.Schema({
-  accessToken: String,
-  user_id: mongoose.Types.ObjectId,
-});
+const fs = require('fs');
+const path = require('path');
+const Mongoose = require('mongoose');
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.js')[env];
 
-const robotSchema = new mongoose.Schema({
-  serial: String,
-  modules_id: [mongoose.Types.ObjectId],
-  name: String,
-});
+if (config.database.url) {
+  setTimeout(function () {
+    Mongoose.connect(config.database.url, config.database.options);
+  }, 60000)
+} else if (config.database.config.dbName) {
+  setTimeout(function () {
+    Mongoose.connect(`${config.database.protocol}://${config.database.username}:${config.database.password}@${config.database.host}:${config.database.port}`, config.database.options);
+  }, 60000)
+} else {
+  setTimeout(function () {
+    Mongoose.connect(`${config.database.protocol}://${config.database.username}:${config.database.password}@${config.database.host}:${config.database.port}/${config.database.name}`, config.database.options);
+  }, 60000)
+}
 
-const registedModuleSchema = new mongoose.Schema(
-  {
-    serial: String,
-    type_id: mongoose.Types.ObjectId,
-    data: mongoose.Schema.Types.Mixed,
-    name: String,
-  },
-  {
-    timestamps: true,
-  }
-);
+const db = () => {
+  const m = {};
 
-const moduleTypeSchema = new mongoose.Schema({
-  name: String,
-});
+  fs
+    .readdirSync(__dirname)
+    .filter(file => {
+      return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+    })
+    .forEach(file => {
+      const model = require(path.resolve(__dirname, file))(Mongoose);
+      m[model.modelName] = model;
+    });
 
-const User = mongoose.model("User", userSchema);
-const Robot = mongoose.model("Robot", robotSchema);
+  return m;
+}
 
-const ModuleType = mongoose.model("ModuleType", moduleTypeSchema);
-const RegistedModule = mongoose.model(
-  "RegistedModule",
-  registedModuleSchema,
-  "RegistedModule"
-);
 
-module.exports = { User, Robot, RegistedModule, ModuleType };
+const models = db();
+const mongoose = Mongoose;
+
+module.exports = mongoose;
+module.exports.default = models;

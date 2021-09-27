@@ -1,34 +1,32 @@
 import axios from "axios";
-// import store from "../store"
 import VueCookies from "vue-cookies";
 import conf from "../utils/conf";
-//request 설정
 
 const request = axios.create({
   baseURL: conf.baseURL + conf.port.server,
+  timeout: 3000
 });
 request.interceptors.request.use(
-  async function(config) {
-    config.timeout = 10000;
+  async function (config) {
     config.headers["x-access-token"] = VueCookies.get("accessToken");
     config.headers["Content-Type"] = "application/json";
     return config;
   },
-  function(error) {
+  function (error) {
     console.log("axios request error : ", error);
     return Promise.reject(error);
   }
 );
 
 request.interceptors.response.use(
-  function(response) {
+  function (response) {
     try {
       return response;
     } catch (err) {
       console.error("[axios.interceptors.response] response : ", err.message);
     }
   },
-  async function(error) {
+  async function (error) {
     return Promise.reject(error);
   }
 );
@@ -59,26 +57,28 @@ export const robotAPI = {
   verifyRobot: (form) => {
     return request.post("/unauth/verifyRobot", { form });
   },
-  getModules: (_id) => {
+  getModules: (id) => {
     console.log("robotAPI _ GETMODULES : ");
-    return request.post("/auth/getModules", { _id });
+    return request.post("/auth/getModules", { id });
   },
-  getModule: (_id) => {
+  getModule: (id) => {
     console.log("robotAPI _ GETMODULE : ");
-    return request.post("/auth/getModule", { _id });
+    return request.post("/auth/getModule", { id });
   },
 };
 
 export const moduleAPI = {
-  command: (data) => {
-    return request
-      .post("/auth/commandModule", {
-        data: data,
-        timeout: 3000,
+  command: async (data) => {
+    const res = await request
+      .post("/auth/moduleCmd",
+        data,
+      ).then((data) => {
+        return data
       })
       .catch((error) => {
-        if (error.response.status == 404) alert("경로가 존재하지 않습니다");
-        return error.response.status;
+        // alert(error);
+        return error;
       });
+    return res
   },
 };

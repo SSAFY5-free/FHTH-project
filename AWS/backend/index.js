@@ -3,32 +3,32 @@ const app = express();
 const routes = require("./routes");
 const env = process.env;
 require("dotenv").config({});
-require("./utils/mongodb")();
 
 //middleware
 const cors = require("cors");
-var whitelist = ["http://127.0.0.1:8081", "http://localhost:8081"];
+var whitelist = ["http://127.0.0.1:8081", "http://127.0.0.1:8080", "http://127.0.0.1:8079"];
 var corsOptions = {
   origin: function (origin, callback) {
     // if (whitelist.indexOf(origin) !== -1) {
-    callback(null, true);
+      callback(null, true);
     // } else {
-    // callback(new Error("Not allowed by CORS"));
+      // callback(new Error("Not allowed by CORS"));
     // }
   },
 };
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors(corsOptions));
-
 app.use("/", routes);
+
 
 const http_server = require("http").createServer(app);
 const https_server = require("https").createServer(
   {
-    //  ca: fs.readFileSync('/etc/letsencrypt/live/내블로그주소/fullchain.pem'),
-    //  key: fs.readFileSync('/etc/letsencrypt/live/내블로그주소/privkey.pem'),
-    //  cert: fs.readFileSync('/etc/letsencrypt/live/내블로그주소/cert.pem')
+    //  ca: fs.readFileSync('/fullchain.pem'),
+    //  key: fs.readFileSync('/privkey.pem'),
+    //  cert: fs.readFileSync('/cert.pem')
   },
   app
 );

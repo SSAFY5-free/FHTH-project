@@ -1,12 +1,12 @@
 const express = require("express");
-const { ModuleType, RegistedModule, Robot, User } = require("../models");
+const db = require("../models").default
 const router = express.Router();
 require("../models");
 
 router.post("/addRobot", async (req, res) => {
   const { serial, modules_id, name } = req.body;
-  const result = await Robot.create({ serial, modules_id, name });
-  console.log(result);
+  const result = await db["robots"].create({ serial, modules_id, name });
+  // console.log(result);
 
   if (!result) res.json({ result: 0 });
   else res.json({ result: 1 });
@@ -16,7 +16,7 @@ router.post("/addRobot", async (req, res) => {
 router.post("/addAccount", async (req, res) => {
   const { email, pw, robots_id } = req.body;
   console.log(email, pw, robots_id);
-  User.create(
+  db["users"].create(
     {
       email,
       pw,
@@ -31,7 +31,7 @@ router.post("/addAccount", async (req, res) => {
 });
 
 router.get("/addModuleType/:name", async (req, res) => {
-  ModuleType.create({ ...req.params })
+  db["moduleTypes"].create({ ...req.params })
     .then((data) => {
       console.log(data);
       return res.send("ok");
@@ -42,7 +42,7 @@ router.get("/addModuleType/:name", async (req, res) => {
 });
 router.post("/addRegistedModule/", async (req, res) => {
   const { serial, type_id, data, name } = req.body;
-  RegistedModule.create({ serial, type_id, data, name })
+  db["registedModules"].create({ serial, type_id, data, name })
     .then((data) => {
       console.log(data);
     })

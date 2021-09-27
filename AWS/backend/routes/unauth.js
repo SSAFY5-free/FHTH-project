@@ -1,11 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const path = require("path");
 const unauthService = require("../service/unauth");
 
-const jwt = require("jsonwebtoken");
-
-const { User, RegistedModule, Robot, Session } = require("../models");
 
 router.post("/getAccessToken", async (req, res) => {
   unauthService
@@ -15,7 +11,7 @@ router.post("/getAccessToken", async (req, res) => {
       return res.json(data);
     })
     .catch((error) => {
-      return res.status(500).json("error");
+      return res.status(500).json(error);
     });
 });
 router.post("/addAccount", async (req, res) => {
@@ -25,7 +21,7 @@ router.post("/addAccount", async (req, res) => {
       return res.status(200).json(data);
     })
     .catch((error) => {
-      return res.status(500).json("error");
+      return res.status(500).json(error);
     });
 });
 router.post("/setModule", async (req, res) => {
@@ -35,7 +31,7 @@ router.post("/setModule", async (req, res) => {
       return res.send("ok");
     })
     .catch((error) => {
-      return res.status(500).send("error");
+      return res.status(500).send(error);
     });
 });
 
@@ -46,7 +42,17 @@ router.post("/verifyRobot", async (req, res) => {
       return res.send("ok");
     })
     .catch((error) => {
-      return res.status(500).send("error");
+      return res.status(500).send(error);
+    });
+});
+router.post("/action", async (req, res) => {
+  unauthService
+    .post_action(req)
+    .then((data) => {
+      return res.send("ok");
+    })
+    .catch((error) => {
+      return res.status(500).send(error);
     });
 });
 module.exports = router;

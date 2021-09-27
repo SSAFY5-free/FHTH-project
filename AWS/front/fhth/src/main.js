@@ -4,12 +4,11 @@ import router from "./router";
 import store from "./store";
 import "./assets/css/all.css";
 import ElementUI from "element-ui";
+import locale from 'element-ui/lib/locale/lang/ko'
 import "element-ui/lib/theme-chalk/index.css";
 
 Vue.config.productionTip = false;
-Vue.use(ElementUI);
-
-Vue.prototype.$socket = "fff";
+Vue.use(ElementUI, { locale });
 
 new Vue({
   router,

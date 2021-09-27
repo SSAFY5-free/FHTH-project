@@ -2,6 +2,7 @@ $nav-height: 80px;
 $ModuleBar-width: 100px;
 $robot-width: 450px;
 $sideBar-width: #{$robot-width + $ModuleBar-width};
+$moduleView_card_header_height: 80px;
 .bc {
   border: 1px solid black;
 }
@@ -76,6 +77,9 @@ body,
           flex-direction: column;
           // flex-direction: column;
           // justify-content: center;
+          button {
+            font-size: 30px;
+          }
           > div {
             display: flex;
             > div {
@@ -110,24 +114,148 @@ body,
       height: 80%;
       width: 80%;
     }
-    > .el-card {
-      > #ModuleView {
-        padding: 40px;
-        > #dev1 {
-          // background-color: black;
-          > #view {
-            // background-color: black;
+    // > .el-card {
+    > #ModuleView {
+      padding: 40px;
+      padding-bottom: 80px;
+      > .el-card__header {
+        font-size: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      > .el-card__body {
+        display: flex;
+        height: -webkit-calc(100% - #{$moduleView_card_header_height});
+        justify-content: space-evenly;
+        > #moduleStatus {
+          width: 80%;
+          flex: 1;
+          > * {
+            height: 100%;
             display: flex;
-            justify-content: space-between;
-            > * {
-              flex-grow: 1;
+            flex-direction: column;
+            align-items: center;
+          }
+          > * > * > .el-card__header {
+            font-size: 25px;
+            height: 80px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          > * > * > .el-card__body {
+            display: flex;
+            height: -webkit-calc(100% - 80px - 20px);
+            padding: 20px 40px 40px 40px;
+          }
+          > #dev1 {
+            > #info {
+              flex: 1;
+              margin-bottom: 20px;
+
+              > .el-card__body {
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .el-progress {
+                  margin-top: 12px;
+                }
+                > #eatTime {
+                  flex: 1;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                }
+                > #remain {
+                  flex: 1;
+                  width: 80%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  > * {
+                    width: 100%;
+                  }
+
+                  // flex: 1;
+                }
+              }
             }
             > #control {
+              flex: 1;
               display: flex;
               flex-direction: column;
-              align-items: flex-end;
-              > * {
-                width: 80%;
+              align-items: center;
+              // > * {
+              //   width: 80%;
+              // }
+              > .el-card__body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }
+          }
+          > #dev2 {
+            > #info {
+              margin-bottom: 20px;
+              > .el-card__body {
+                height: -webkit-calc(100% - 80px - 40px);
+                > div {
+                  display: flex;
+                  flex-direction: row;
+                  width: 100%;
+                  > div {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    justify-content: center;
+                    align-items: center;
+                  }
+                }
+              }
+            }
+            > #control {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              // > * {
+              //   width: 80%;
+              // }
+              > .el-card__body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+            }
+          }
+        }
+        > #moduleHistory {
+          width: 80%;
+          display: flex;
+          justify-content: center;
+          flex: 1;
+          > .el-card {
+            height: 100%;
+          }
+
+          > .el-card > .el-card__header {
+            font-size: 25px;
+            height: 80px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          > .el-card > .el-card__body {
+            height: -webkit-calc(100% - 80px);
+            > div {
+              width: 100%;
+              > div {
+                margin: 15px 0px 30px 0px;
               }
             }
           }

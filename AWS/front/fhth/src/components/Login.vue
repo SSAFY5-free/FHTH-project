@@ -1,6 +1,6 @@
 <template>
   <el-card id="Login" style="width: 400px; margin: auto">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <img alt="Vue logo" src="../assets/logo(1).png" />
     <el-form :label-position="labelPosition" label-width="100px" :model="form">
       <el-form-item label="email">
         <el-input v-model="form.email"></el-input>
@@ -39,9 +39,8 @@ export default {
         const { data } = res;
         if (data.accessToken) {
           // 토큰을 쿠키에 저장
-          this.$store.commit("userInfo/loginToken", {
-            ...data,
-          });
+          console.log(data);
+          this.$store.commit("userInfo/loginToken", data);
           this.$router.push("/main");
         } else {
           // 로그인 실패

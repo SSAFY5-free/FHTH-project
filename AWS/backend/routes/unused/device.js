@@ -36,7 +36,7 @@ router.post("/validation/registedDevice", async (req, res) => {
     console.log(req.body)
     const {serial, type} = req.body;
     const result = await RegistedDevice.findOne({serial, type})
-    console.log(result)
+    // console.log(result)
 
     if(!result) res.json({data:0})
     else res.json({data:1})

@@ -70,6 +70,9 @@ body,
   display: flex;
   flex-direction: column;
 }
+#Main > #sideBar > #Robot > .el-card__body #keyPad button {
+  font-size: 30px;
+}
 #Main > #sideBar > #Robot > .el-card__body #keyPad > div {
   display: flex;
 }
@@ -100,23 +103,135 @@ body,
   height: 80%;
   width: 80%;
 }
-#Main > #mainView > .el-card > #ModuleView {
+#Main > #mainView > #ModuleView {
   padding: 40px;
+  padding-bottom: 80px;
 }
-#Main > #mainView > .el-card > #ModuleView > #dev1 > #view {
+#Main > #mainView > #ModuleView > .el-card__header {
+  font-size: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
-#Main > #mainView > .el-card > #ModuleView > #dev1 > #view > * {
-  flex-grow: 1;
+#Main > #mainView > #ModuleView > .el-card__body {
+  display: flex;
+  height: -webkit-calc(100% - 80px);
+  justify-content: space-evenly;
 }
-#Main > #mainView > .el-card > #ModuleView > #dev1 > #view > #control {
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus {
+  width: 80%;
+  flex: 1;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > * {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 }
-#Main > #mainView > .el-card > #ModuleView > #dev1 > #view > #control > * {
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > * > * > .el-card__header {
+  font-size: 25px;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > * > * > .el-card__body {
+  display: flex;
+  height: -webkit-calc(100% - 80px - 20px);
+  padding: 20px 40px 40px 40px;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev1 > #info {
+  flex: 1;
+  margin-bottom: 20px;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev1 > #info > .el-card__body {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev1 > #info > .el-card__body .el-progress {
+  margin-top: 12px;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev1 > #info > .el-card__body > #eatTime {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev1 > #info > .el-card__body > #remain {
+  flex: 1;
   width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev1 > #info > .el-card__body > #remain > * {
+  width: 100%;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev1 > #control {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev1 > #control > .el-card__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev2 > #info {
+  margin-bottom: 20px;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev2 > #info > .el-card__body {
+  height: -webkit-calc(100% - 80px - 40px);
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev2 > #info > .el-card__body > div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev2 > #info > .el-card__body > div > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev2 > #control {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleStatus > #dev2 > #control > .el-card__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleHistory {
+  width: 80%;
+  flex: 1;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleHistory > .el-card {
+  height: 100%;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleHistory > .el-card > .el-card__header {
+  font-size: 25px;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleHistory > .el-card > .el-card__body {
+  height: -webkit-calc(100% - 80px);
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleHistory > .el-card > .el-card__body > div {
+  width: 100%;
+}
+#Main > #mainView > #ModuleView > .el-card__body > #moduleHistory > .el-card > .el-card__body > div > div {
+  margin: 15px 0px 30px 0px;
 }
 
 /*# sourceMappingURL=all.css.map */

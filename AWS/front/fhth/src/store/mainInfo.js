@@ -47,11 +47,13 @@ const mainInfo = {
   },
   actions: {
     async GET_ROBOTS_FROM_SERVER({ dispatch, commit }) {
+      console.log("GET ROBOTS")
       const robots = (await robotAPI.getRobots()).data;
       const robots_data = await robots.reduce(async (promise, robot) => {
         const acc = await promise.then();
         acc.push({ ...robot });
-        const data = await dispatch("GET_MODULES", robot._id);
+
+        const data = await dispatch("GET_MODULES", robot.id);
 
         //module
         data.map((e) => {
@@ -65,8 +67,9 @@ const mainInfo = {
       commit("SET_ROBOTS", robots_data);
     },
 
-    async GET_MODULES(state, robot_id) {
-      const { data } = await robotAPI.getModules(robot_id);
+    async GET_MODULES(state, id) {
+      console.log("GET MODULES")
+      const { data } = await robotAPI.getModules(id);
       for (let i = 0; i < data.length; i++) {
         //   //시간 추가
         data[i]["time"] = new Date();

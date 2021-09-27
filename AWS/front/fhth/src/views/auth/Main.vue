@@ -23,11 +23,9 @@ import { baseURL, port } from "../../utils/conf";
 export default {
   components: {
     Robot,
-    // Modules,
     ModuleView,
     ModuleBar,
     Nav,
-    // User,
   },
   computed: {
     ...mapState("mainInfo", ["robots", "cur", "lst"]),
@@ -52,12 +50,11 @@ export default {
         },
       }),
     });
-
     setInterval(() => {
       this.$store.dispatch("userInfo/EMIT_SOCKET", {
         namespace: "module",
         data: {
-          _id: this.modules[this.cur.module_idx]._id,
+          id: this.modules[this.cur.module_idx].id,
         },
       });
     }, 2000);

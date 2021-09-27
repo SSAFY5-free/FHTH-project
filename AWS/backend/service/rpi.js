@@ -1,4 +1,4 @@
-const { RegistedModule, Session } = require("../models");
+const db = require("../models").default;
 exports.post_session = (req) => {
   return new Promise(async (resolve, reject) => {
     req.session.msg = "msg";

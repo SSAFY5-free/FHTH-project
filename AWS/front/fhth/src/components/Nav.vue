@@ -10,6 +10,7 @@
       <h1>FHTH</h1>
     </el-menu-item>
     <el-menu-item index="1">Hello, {{ email }}</el-menu-item>
+
     <!-- <el-submenu index="2">
         <template slot="title">Workspace</template>
         <el-menu-item index="2-1">item one</el-menu-item>
@@ -40,7 +41,7 @@ import VueCookies from "vue-cookies";
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("userInfo", ["name", "email"]),
+    ...mapState("userInfo", ["name", "host", "accessToken", "email"]),
   },
   data() {
     return {

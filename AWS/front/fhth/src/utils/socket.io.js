@@ -1,8 +1,8 @@
 const { RegistedModule } = require("./models");
-export default function(server) {
+export default function (server) {
   const io = require("socket.io")(server, {
     cors: {
-      origin: "http://54.180.202.172:8081",
+      origin: "http://localhost:8080",
       methods: ["GET", "POST"],
       allowedHeaders: ["my-custom-header"],
       transports: ["websocket", "polling"],
